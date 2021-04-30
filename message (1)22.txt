@@ -1,0 +1,78 @@
+static bool IsValidSequence(string halfDNASequence)
+        {
+            foreach(char nucleotide in halfDNASequence)
+            {
+                if (!"ATCG".Contains(nucleotide))
+                {
+                    return false;
+                }
+            }return true;
+        }
+        static string ReplicateSequence(string halfDNASequence)
+        {
+            string result = "";
+            foreach(char nucleotide in halfDNASequence)
+            {
+                result +="TAGC"["ATCG".IndexOf(nucleotide)];
+            }return result;
+        }
+        static void Main(string[] args)
+        {
+            string DNA;
+            bool IsValid;
+            int P1 = 1;
+            while (P1 == 1)
+            {
+                Console.Write("Input DNA:");
+                DNA = Console.ReadLine();
+                IsValid = IsValidSequence(DNA);
+                if (IsValid == true)
+                {
+                    Console.WriteLine("Current half DNA sequence:{0}", DNA);
+                    Console.WriteLine("Do you want to replicate it? (Y/N):");
+                    Char Answer = Char.Parse(Console.ReadLine());
+                    int P2 = 1;
+                    while (P2 == 1)
+                    {
+                        if (Answer == 'A')
+                        {
+                            string Answer2;
+                            Answer2 = ReplicateSequence(DNA);
+                            Console.WriteLine("Replicated half DNA sequence:{0}",Answer2);
+                        }
+                        P2 = 2;
+                        if (Answer == 'N')
+                        {
+                            P2 = 2;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please input A or N.");
+                            Answer = Char.Parse(Console.ReadLine());
+                        }
+                    }
+                }
+                if (IsValid == false)
+                {
+                    Console.WriteLine("That half DNA sequence is invalid.");
+                }
+                Console.WriteLine("Do you want to process another sequence ? (Y/N)");
+                Char Answer3 = Char.Parse(Console.ReadLine());
+                int P3 = 1;
+                while (P3 == 1)
+                {
+                    if (Answer3 == 'A')
+                    {
+                        P3 = 2;
+                    }else if (Answer3 == 'N')
+                    {
+                        P3 = 2;
+                        P1 = 2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please input A or N.");
+                        Answer3 = char.Parse(Console.ReadLine());
+                    }
+                }
+            }Console.ReadLine();
